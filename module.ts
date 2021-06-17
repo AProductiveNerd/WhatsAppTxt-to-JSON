@@ -1,6 +1,6 @@
-import { readFileSync, writeFile } from "fs";
+import { readFileSync } from "fs";
 
-const messageArray: {
+interface message {
 	id: number;
 	message: {
 		date: string;
@@ -8,9 +8,11 @@ const messageArray: {
 		sender: string;
 		content: string;
 	};
-}[] = [];
+}
 
-exports.converter = async (name: string) => {
+const messageArray: message[] = [];
+
+export const converter = async (name: string): Promise<message[]> => {
 	const data: string = readFileSync(`./${name}.txt`).toLocaleString();
 
 	// Define the id and the smessage test regex
@@ -43,3 +45,5 @@ exports.converter = async (name: string) => {
 	// Write the output file
 	return messageArray;
 };
+
+module.exports.converter = converter;
