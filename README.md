@@ -21,5 +21,5 @@ const w2j = require("whatsapp-to-json");
 
 Then you can use it by
 ```javascript
-const convertedArray = converter(PATH_TO_FILE);
+const convertedArray = w2j.converter(PATH_TO_FILE);
 ```
