@@ -10,10 +10,10 @@ const messageArray: {
 	};
 }[] = [];
 
-const converter = async (name: string) => {
+exports.converter = async (name: string) => {
 	const data: string = readFileSync(`./${name}.txt`).toLocaleString();
 
-	// Define the id and the message test regex
+	// Define the id and the smessage test regex
 	let id: number = 1;
 	const myReg: RegExp = /^[0-9][0-9]\/[0-9][0-9]\/[0-9][0-9]/;
 
@@ -41,33 +41,5 @@ const converter = async (name: string) => {
 	});
 
 	// Write the output file
-	writeFile(
-		"./output.json",
-		JSON.stringify(messageArray),
-		"utf8",
-		(err) => {
-			if (err) {
-				console.log(
-					"An error occured while writing JSON Object to File."
-				);
-				return console.log(err);
-			}
-
-			console.log("JSON file has been saved.");
-		}
-	);
+	return messageArray;
 };
-
-// Get the name of the chat txt file and run the converter() funciton
-const readline = require("readline").createInterface({
-	input: process.stdin,
-	output: process.stdout,
-});
-
-readline.question(
-	"Please enter the name of your txt file without the .txt extension: ",
-	(name: string) => {
-		converter(name);
-		readline.close();
-	}
-);

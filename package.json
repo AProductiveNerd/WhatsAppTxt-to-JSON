@@ -1,0 +1,24 @@
+{
+	"name": "whatsapp-to-json",
+	"version": "1.0.0",
+	"description": "WhatsApp chat export to JSON converter using Node.js",
+	"main": "module.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/AProductiveNerd/WhatsAppTxt-to-JSON.git"
+	},
+	"keywords": [
+		"WhatsApp",
+		"Converter",
+		"JSON"
+	],
+	"author": "Navraj Sikand",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/AProductiveNerd/WhatsAppTxt-to-JSON/issues"
+	},
+	"homepage": "https://github.com/AProductiveNerd/WhatsAppTxt-to-JSON#readme"
+}
