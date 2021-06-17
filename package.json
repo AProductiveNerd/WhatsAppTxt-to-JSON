@@ -1,6 +1,6 @@
 {
 	"name": "whatsapp-to-json",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "WhatsApp chat export to JSON converter using Node.js",
 	"main": "module.js",
 	"scripts": {
