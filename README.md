@@ -14,7 +14,7 @@ const messageArray: {
 }[];
 ```
 ## Using as an npm package
-To use this package in a Node.js project, import is using
+To use this package in a Node.js project, import it using
 ```javascript
 const w2j = require("whatsapp-to-json");
 ```
