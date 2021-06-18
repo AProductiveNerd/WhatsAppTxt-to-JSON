@@ -1,9 +1,9 @@
 # WhatsAppTxt-to-JSON
 This simple script takes in the `.txt` file exported by WhatsApp and outputs a `.json` file with an array of messages as objects.
 
-The interface of the exported `output.json` file is
+The format of the exported `output.json` file is an array of the interface:
 ```typescript
-const messageArray: {
+interface messageObj {
 	id: number;
 	message: {
 		date: string;
@@ -11,7 +11,7 @@ const messageArray: {
 		sender: string;
 		content: string;
 	};
-}[];
+}
 ```
 ## Using as an npm package
 To use this package in a Node.js project, first install it using
