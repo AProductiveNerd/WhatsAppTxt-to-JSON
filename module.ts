@@ -19,7 +19,7 @@ export const converter = async (name: string): Promise<message[]> => {
 	let id: number = 1;
 
 	const newReg: RegExp =
-		/\d*\/\d*\/\d*,\s\d:\d*\s[a|p]m\s-\s\w+[\s\w]*:\s\w+[\s\w]*/gi;
+		/\d*\/\d*\/\d*,\s\d:\d*\s[a|p]m\s-\s\w+[\?]*[\s\w]*:\s\w+[\?]*[\sa-z\?]*/gi;
 
 	// split messages string to messages array at \n :
 	const messages: string[] = data.match(newReg) || [""];
