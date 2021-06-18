@@ -1,6 +1,6 @@
-import { readFileSync, writeFile } from "fs";
+import { readFileSync } from "fs";
 
-const messageArray: {
+interface message {
 	id: number;
 	message: {
 		date: string;
@@ -8,54 +8,42 @@ const messageArray: {
 		sender: string;
 		content: string;
 	};
-}[] = [];
+}
 
-const converter = async (name: string) => {
+const messageArray: message[] = [];
+
+const converter = async (name: string): Promise<message[]> => {
 	const data: string = readFileSync(`./${name}.txt`).toLocaleString();
 
-	// Define the id and the message test regex
+	// Define the id and the smessage test regex
 	let id: number = 1;
-	const myReg: RegExp = /^[0-9][0-9]\/[0-9][0-9]\/[0-9][0-9]/;
+
+	const newReg: RegExp =
+		/\d*\/\d*\/\d*,\s\d:\d*\s[a|p]m\s-\s\w+[\s\w]*:\s\w+[\s\w]*/gi;
 
 	// split messages string to messages array at \n :
-	const messages: string[] = data.split(/\n/);
+	const messages: string[] = data.match(newReg) || [""];
 
 	// Push the message objects to messageArray
 	messages.map((message: string) => {
-		// Check if message is valid before operating on it
-		if (myReg.test(message)) {
-			const date: string = message.split(",")[0];
-			const time: string = message.split(",")[1].split(" - ")[0];
-			const sender: string = message.split(": ")[0].split("- ")[1];
-			const content: string = message.split(": ")[1];
+		// Split the message string to difference components
+		const date: string = message.split(",")[0];
+		const time: string = message.split(", ")[1].split(" - ")[0];
+		const sender: string = message.split(": ")[0].split("- ")[1];
+		const content: string = message.split(": ")[1];
 
-			// Push the values as an object to messageArray
-			messageArray.push({
-				id,
-				message: { date, time, sender, content },
-			});
+		// Push the values as an object to messageArray
+		messageArray.push({
+			id,
+			message: { date, time, sender, content },
+		});
 
-			// Increment the id
-			id++;
-		}
+		// Increment the id
+		id++;
 	});
 
-	// Write the output file
-	writeFile(
-		"./output.json",
-		JSON.stringify(messageArray),
-		"utf8",
-		(err) => {
-			if (err) {
-				console.log(
-					"An error occured while writing JSON Object to File."
-				);
-				return console.log(err);
-			}
-
-			console.log("JSON file has been saved.");
-		}
-	);
+	// Return messageArray
+	return messageArray;
 };
 
 // Get the name of the chat txt file and run the converter() funciton
